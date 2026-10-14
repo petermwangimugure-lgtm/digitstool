@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KING PETER V6 - PRIVATE</title>
+<title>KING PETER V6 PRIVATE</title>
 <style>
 body{font-family:Arial;background:#000;margin:0;padding:8px;color:white;text-align:center}
 .top{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;padding:14px;border-radius:12px;font-weight:900;font-size:16px}
@@ -27,13 +27,13 @@ input{width:94%;padding:14px;font-size:20px;border:3px solid #FFD700;border-radi
 <body>
 
 <div id="loginArea">
-<div class="top">👑 KING PETER PRIVATE TOOL<br>🔒 ENTER PASSWORD</div>
+<div class="top">👑 KING PETER PRIVATE TOOL<br>🔒 SECURE ACCESS ONLY</div>
 <div class="card" style="text-align:center">
-<p style="font-weight:bold;font-size:16px">This tool is private for KING PETER clients only</p>
-<input id="passInput" type="password" placeholder="Enter Password: 1991">
-<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK TOOL</button>
-<p style="font-size:12px;color:gray;margin-top:10px">Don't have password? Contact owner:</p>
-<a href="https://wa.me/254140702908?text=Hello%20King%20Peter%20I%20need%20password%20for%20your%20digit%20tool%20V6" style="text-decoration:none">
+<p style="font-weight:bold;font-size:15px">Enter your private access password</p>
+<input id="passInput" type="password" placeholder="Enter Password">
+<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK</button>
+<p style="font-size:12px;color:gray;margin-top:10px">Forgot password? Contact admin:</p>
+<a href="https://wa.me/254140702908?text=Hello%20King%20Peter%20I%20need%20access%20to%20your%20private%20digit%20tool" style="text-decoration:none">
 <button class="btn btn-whatsapp">💬 WHATSAPP: 0140702908</button>
 </a>
 </div>
@@ -57,7 +57,7 @@ input{width:94%;padding:14px;font-size:20px;border:3px solid #FFD700;border-radi
 </div>
 <div class="matchbox"><b>🔁 MATCHES:</b><div id="matches">-</div></div>
 <div class="matchbox"><b>🎯 TRADE NOW:</b><div id="trade">-</div></div>
-<button class="btn btn-gold" onclick="lock()">🔒 LOCK TOOL</button>
+<button class="btn btn-gold" onclick="lock()">🔒 LOCK</button>
 </div>
 </div>
 
@@ -68,7 +68,7 @@ let p=document.getElementById('passInput').value;
 if(p===MY_PASSWORD){
 document.getElementById('loginArea').style.display='none';
 document.getElementById('toolArea').style.display='block';
-}else{alert('❌ Wrong password! Correct is 1991');}
+}else{alert('❌ Wrong password! Contact admin on WhatsApp for access.');}
 }
 function lock(){
 document.getElementById('toolArea').style.display='none';
@@ -117,12 +117,12 @@ document.getElementById('hotreason').innerText='Last='+last+' NoMatch='+noMatch+
 let alertBox=document.getElementById('soundAlert');
 let trade='';
 if(noMatch>=6){
-alertBox.style.display='block';alertBox.innerText='🔔 MATCH DUE! '+noMatch+' ticks! TRADE MATCHES ON '+hot.digit+' NOW!';trade=`🚨 TRADE MATCHES on ${hot.digit} NOW! MATCH OVERDUE!`;playBeep(4);
+alertBox.style.display='block';alertBox.innerText='🔔 MATCH DUE! '+noMatch+' ticks! TRADE MATCHES ON '+hot.digit+' NOW!';trade=`🚨 TRADE MATCHES on ${hot.digit} NOW!`;playBeep(4);
 }else if(noMatch>=4){
-alertBox.style.display='block';alertBox.style.background='orange';alertBox.innerText='⚠️ MATCH COMING SOON! '+noMatch+' ticks! Prepare '+hot.digit;trade=`⚠️ PREPARE MATCHES on ${hot.digit} - ${noMatch} ticks`;playBeep(2);
+alertBox.style.display='block';alertBox.style.background='orange';alertBox.innerText='⚠️ MATCH COMING '+noMatch+' ticks! Prepare '+hot.digit;trade=`⚠️ PREPARE MATCHES on ${hot.digit}`;playBeep(2);
 }else if(noMatch==0){
 alertBox.style.display='none';trade=`🔵 TRADE DIFFERS - Just had MATCH (${last})`;
-}else{alertBox.style.display='none';trade=`TRADE MATCHES on ${hot.digit} (HOT) - NoMatch ${noMatch}`;}
+}else{alertBox.style.display='none';trade=`TRADE MATCHES on ${hot.digit} (HOT)`;}
 document.getElementById('trade').innerHTML=trade;
 }
 </script>
