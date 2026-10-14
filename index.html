@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>King Peter Digit Tools</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06080f;color:#fff;font-family:Arial;text-align:center}
+.top{background:#0a0f1e;padding:12px;display:flex;justify-content:space-between}
+.logo{font-weight:900;font-size:20px} .logo b{color:gold}
+.btn{padding:10px 18px;border-radius:20px;border:none;font-weight:700;cursor:pointer}
+.btn-gold{background:linear-gradient(90deg,gold,orange);color:#000}
+.card{background:#121a30;border:1px solid #1e2d55;border-radius:16px;padding:14px;margin:10px}
+.tick{font-size:28px;font-weight:900;color:gold}
+.digit{display:inline-block;width:28px;height:28px;line-height:28px;border-radius:50%;background:#1a2440;margin:2px;font-size:12px}
+input,select{background:#000;color:gold;border:1px solid #2a3a6a;border-radius:10px;padding:10px;width:100%;margin:4px 0}
+label{font-size:11px;opacity:.7;text-align:left;display:block;margin-top:6px}
+.row{display:flex;gap:8px}.row>div{flex:1}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">king<b>peter</b> tools</div><div id="balance" style="color:gold;font-weight:900"></div></div>
+
+<div class="card" style="border:2px solid gold">
+<h3 style="color:gold">🔐 Connect Deriv</h3>
+<input id="token" placeholder="Paste Deriv API Token">
+<button class="btn btn-gold" onclick="login()" style="width:100%;margin-top:8px">CONNECT & TRADE</button>
+<p style="font-size:10px;margin-top:6px"><a href="https://app.deriv.com/account/api-token" target="_blank" style="color:#5ee1ff">Get Token Here</a></p>
+</div>
+
+<div class="card">
+<div class="row"><div><label>Market</label><select id="market"><option value="R_10">V10</option><option value="R_25">V25</option><option value="R_50">V50</option><option value="R_75">V75</option><option value="R_100">V100</option></select></div><div><button class="btn btn-gold" onclick="connect()" style="width:100%;margin-top:18px">CONNECT</button></div></div>
+<div class="row" style="margin-top:8px"><div>Price<div id="price" class="tick">---</div></div><div>Last Digit<div id="lastDigit" class="tick" style="color:#fff">-</div></div></div>
+<div id="digits" style="margin-top:8px"></div>
+<div id="signal" style="margin-top:8px;color:gold;font-weight:900"></div>
+</div>
+
+<div class="card">
+<h4>📊 Stats Last 100</h4>
+<div class="row" style="margin-top:8px"><div>Even <b id="evenPct">0%</b></div><div>Odd <b id="oddPct">0%</b></div><div>Over <b id="overPct">0%</b></div><div>Under <b id="underPct">0%</b></div></div>
+<div id="digitBars" style="margin-top:10px"></div>
+</div>
+
+<div class="card" style="border:2px solid #5ee1ff">
+<h3>🤖 AUTO BOT</h3>
+<div class="row"><div><label>Strategy</label><select id="strategy"><option value="EVEN">Even</option><option value="ODD">Odd</option><option value="OVER">Over 4</option><option value="UNDER">Under 4</option><option value="AUTO_EVEN_ODD">Auto Even/Odd 60%+</option></select></div><div><label>Stake $</label><input id="stake" value="0.35"></div></div>
+<div class="row"><div><label>TP/SL</label><div class="row"><input id="tp" value="10"><input id="sl" value="10"></div></div><div><label>Martingale</label><input id="martingale" value="2.1"></div></div>
+<div class="row" style="margin-top:10px"><div><button id="startBtn" class="btn btn-gold" style="width:100%" onclick="startBot()">START BOT</button></div><div><button class="btn" style="width:100%;background:#141d33;color:#fff" onclick="stopBot()">STOP</button></div></div>
+<div style="font-size:12px;margin-top:6px">Status <b id="botStatus">IDLE</b> | Profit <b id="botProfit">$0</b> | Trades <b id="tradeCount">0</b></div>
+<div id="botLog" style="background:#000;border-radius:10px;padding:8px;height:80px;overflow:auto;font-size:11px;text-align:left;margin-top:6px"></div>
+</div>
+
+<script>
+let ws=null,digits=[],auth=false,botRunning=false,currentStake=0,martiStep=0,totalProfit=0,trades=0,lastTrade=0;
+const bars=document.getElementById('digitBars');
+for(let i=0;i<10;i++) bars.innerHTML+=`<div style="display:flex;align-items:center;gap:6px;margin:3px 0"><span style="width:14px">${i}</span><div style="flex:1;height:10px;background:#0f162b;border-radius:10px;overflow:hidden"><div id="d${i}" style="height:100%;width:0%;background:gold;font-size:8px;color:#000">0%</div></div><span id="c${i}" style="width:18px;font-size:10px">0</span></div>`;
+function log(m){document.getElementById('botLog').innerHTML=`<div>[${new Date().toLocaleTimeString()}] ${m}</div>`+document.getElementById('botLog').innerHTML}
+function connect(){if(ws)ws.close();let m=document.getElementById('market').value;ws=new WebSocket('wss://ws.derivws.com/websockets/v3?app_id=1089');ws.onopen=()=>{ws.send(JSON.stringify({ticks:m}));if(auth)ws.send(JSON.stringify({balance:1,subscribe:1}))};ws.onmessage=e=>{let j=JSON.parse(e.data);if(j.tick){let p=j.tick.quote,last=String(p).slice(-1);if(isNaN(last))last=String(Math.floor(p)%10);document.getElementById('price').innerText=p;document.getElementById('lastDigit').innerText=last;addDigit(parseInt(last));if(botRunning)checkBot()}if(j.balance){document.getElementById('balance').innerText='$'+j.balance.balance.toFixed(2)}if(j.buy){log('✅ Buy '+j.buy.contract_id)}if(j.proposal_open_contract&&j.proposal_open_contract.is_sold){let pr=parseFloat(j.proposal_open_contract.profit);totalProfit+=pr;trades++;document.getElementById('botProfit').innerText='$'+totalProfit.toFixed(2);document.getElementById('tradeCount').innerText=trades;if(pr>0){log('🟢 WIN +$'+pr.toFixed(2));martiStep=0;currentStake=parseFloat(document.getElementById('stake').value)}else{log('🔴 LOSS $'+pr.toFixed(2));martiStep++;currentStake*=parseFloat(document.getElementById('martingale').value)} }if(totalProfit>=parseFloat(document.getElementById('tp').value)||totalProfit<=-parseFloat(document.getElementById('sl').value))stopBot()}}; }
+function addDigit(d){digits.unshift(d);if(digits.length>100)digits.pop();let h='';digits.forEach(x=>h+=`<span class="digit">${x}</span>`);document.getElementById('digits').innerHTML=h;let t=digits.length||1,ev=digits.filter(x=>x%2==0).length,ov=digits.filter(x=>x>4).length;document.getElementById('evenPct').innerText=Math.round(ev/t*100)+'%';document.getElementById('oddPct').innerText=Math.round((t-ev)/t*100)+'%';document.getElementById('overPct').innerText=Math.round(ov/t*100)+'%';document.getElementById('underPct').innerText=Math.round((t-ov)/t*100)+'%';for(let i=0;i<10;i++){let pc=Math.round(digits.filter(x=>x==i).length/t*100);document.getElementById('d'+i).style.width=pc+'%';document.getElementById('d'+i).innerText=pc+'%';document.getElementById('c'+i).innerText=digits.filter(x=>x==i).length}if(ev/t>0.6)document.getElementById('signal').innerText='🚀 EVEN STRONG';else if((t-ev)/t>0.6)document.getElementById('signal').innerText='🚀 ODD STRONG';else if(ov/t>0.65)document.getElementById('signal').innerText='📈 OVER';else if((t-ov)/t>0.65)document.getElementById('signal').innerText='📉 UNDER';else document.getElementById('signal').innerText='⚖️ WAIT';}
+function login(){let tk=document.getElementById('token').value.trim();if(!tk){alert('Paste token');return}ws=new WebSocket('wss://ws.derivws.com/websockets/v3?app_id=1089');ws.onopen=()=>ws.send(JSON.stringify({authorize:tk}));ws.onmessage=e=>{let j=JSON.parse(e.data);if(j.authorize){auth=true;document.getElementById('balance').innerText='$'+j.authorize.balance.toFixed(2);log('✅ Login '+j.authorize.email);connect()}if(j.error)alert(j.error.message)}}
+function startBot(){if(!auth){alert('Login first');return}currentStake=parseFloat(document.getElementById('stake').value);botRunning=true;document.getElementById('botStatus').innerText='RUNNING';log('▶️ Bot '+document.getElementById('strategy').value)}
+function stopBot(){botRunning=false;document.getElementById('botStatus').innerText='STOPPED';}
+function checkBot(){if(!botRunning||Date.now()-lastTrade<3000)return;let s=document.getElementById('strategy').value,t=digits.length,ev=digits.filter(x=>x%2==0).length/t,ov=digits.filter(x=>x>4).length/t,should=false,type='';if(s=='EVEN'){should=true;type='DIGITEVEN'}else if(s=='ODD'){should=true;type='DIGITODD'}else if(s=='OVER'){should=true;type='DIGITOVER'}else if(s=='UNDER'){should=true;type='DIGITUNDER'}else if(s=='AUTO_EVEN_ODD'){if(ev>0.6){should=true;type='DIGITEVEN'}else if(ev<0.4){should=true;type='DIGITODD'}}if(should){lastTrade=Date.now();let m=document.getElementById('market').value,st=currentStake.toFixed(2);let req={buy:1,price:st,parameters:{amount:st,basis:'stake',contract_type:type,symbol:m,duration:1,duration_unit:'t',currency:'USD'}};if(type.includes('OVER')||type.includes('UNDER'))req.parameters.barrier=4;log('📤 Buy '+type+' $'+st);ws.send(JSON.stringify(req));ws.send(JSON.stringify({proposal_open_contract:1,subscribe:1}))}}
+connect();
+</script>
+</body>
+</html>
