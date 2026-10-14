@@ -1,1 +1,123 @@
-https://petermwangimugure-lgtm.github.io/digitstool/?v10=1991
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KING PETER V10 1991</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0;text-align:center}
+.top{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;padding:12px;border-radius:12px;font-weight:900;font-size:14px}
+.card{background:#fff;color:#000;border-radius:12px;padding:12px;margin-top:8px;border:3px solid gold;text-align:left}
+.vol-bar{display:flex;gap:3px;flex-wrap:wrap;margin:8px 0}
+.vol{flex:1;min-width:50px;padding:6px;border-radius:7px;font-weight:900;font-size:10px;text-align:center;cursor:pointer;border:2px solid #ccc;background:#eee;color:#000}
+.vol.active{background:gold;border-color:#000;transform:scale(1.05)}
+.freq{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:8px 0}
+.f{padding:6px;border-radius:6px;text-align:center;font-weight:900;font-size:12px;border:2px solid #ddd;background:#f9f9f9;color:#000}
+.f.hot{background:gold;border-color:#000;transform:scale(1.08)}
+.f b{display:block;font-size:16px;color:green}
+.predict{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}
+.pred{border-radius:10px;padding:10px;text-align:center;font-weight:900;border:3px solid gold}
+.pred1{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
+.pred2{background:linear-gradient(90deg,#C0C0C0,#a8a8a8);color:#000}
+.pred3{background:linear-gradient(90deg,#CD7F32,#b56a2a);color:#fff}
+.pred b{display:block;font-size:26px}
+input{width:94%;padding:12px;font-size:16px;border:3px solid gold;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:6px auto}
+.btn{width:95%;padding:11px;border:none;border-radius:10px;font-size:13px;font-weight:bold;margin-top:6px;display:block;margin:auto;cursor:pointer}
+.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000}
+.btn-green{background:#0a8a00;color:#fff}
+.btn-blue{background:#0066ff;color:#fff}
+.btn-wa{background:#25D366;color:#fff}
+#toolArea{display:none}
+.big{font-size:26px;font-weight:900;text-align:center;color:green;margin:6px 0}
+.row{display:flex;gap:4px;margin-top:6px}
+.box{flex:1;background:#111;color:#fff;border-radius:8px;padding:6px;text-align:center;font-size:9px}
+.box b{color:gold;display:block;font-size:14px}
+.alert{padding:8px;border-radius:10px;text-align:center;font-weight:900;margin-top:6px;display:none;font-size:11px;background:red;color:#fff}
+</style>
+</head>
+<body>
+
+<div id="loginArea">
+<div class="top">👑 KING PETER V10<br>PASSWORD: 1991</div>
+<div class="card" style="text-align:center">
+<h3 style="text-align:center;margin:5px 0">🔐 ENTER YOUR PASSWORD</h3>
+<input id="passInput" type="password" placeholder="Type 1991">
+<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK WITH 1991</button>
+<a href="https://wa.me/254140702908" style="text-decoration:none"><button class="btn btn-wa">💬 WhatsApp 0140702908 - $70</button></a>
+<p style="font-size:10px;color:#666;text-align:center;margin-top:6px">Your private password: 1991<br>Do not share until $70 paid</p>
+</div>
+</div>
+
+<div id="toolArea">
+<div class="top">👑 V10 PREDICT 2-3 NUMBERS - Vol: <span id="currentVol">V100(1s)</span></div>
+<div id="soundAlert" class="alert"></div>
+<div class="card">
+<div class="vol-bar">
+<div class="vol" onclick="setVol('V10',this)">V10</div>
+<div class="vol" onclick="setVol('V25',this)">V25</div>
+<div class="vol" onclick="setVol('V50',this)">V50</div>
+<div class="vol" onclick="setVol('V75',this)">V75</div>
+<div class="vol" onclick="setVol('V100',this)">V100</div>
+<div class="vol active" onclick="setVol('V100(1s)',this)">V100(1s)</div>
+</div>
+<input id="n" placeholder="Paste digits e.g. 112233311" type="text">
+<div style="display:flex;gap:4px">
+<button class="btn btn-blue" style="flex:1" onclick="autoPaste()">📋 AUTO PASTE</button>
+<button class="btn btn-green" style="flex:1.5" onclick="calc()">🔮 PREDICT 2-3</button>
+</div>
+<div class="big" id="sum">Sum: 0</div>
+<div style="font-weight:900;font-size:11px;text-align:center">📊 FREQUENCY 0-9:</div>
+<div class="freq" id="freqTable"></div>
+<div style="font-weight:900;font-size:12px;text-align:center;color:#b8860b;margin-top:6px">🔮 PREDICT NEXT - TOP 3:</div>
+<div class="predict" id="predictBox">
+<div class="pred pred1">1st<b>-</b><span>-</span></div>
+<div class="pred pred2">2nd<b>-</b><span>-</span></div>
+<div class="pred pred3">3rd<b>-</b><span>-</span></div>
+</div>
+<div class="row">
+<div class="box">OVER<b id="over">0</b></div>
+<div class="box">UNDER<b id="under">0</b></div>
+<div class="box">LAST<b id="last">-</b></div>
+<div class="box">NO-MATCH<b id="nomatch">0</b></div>
+</div>
+<div style="background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:6px;margin-top:6px;font-size:11px;color:#000"><b>🎯 STRATEGY:</b><div id="trade">-</div></div>
+<p style="font-size:8px;color:#666;text-align:center;margin-top:5px">⚠️ Analysis only. Past frequency does not guarantee future. Trade responsibly.</p>
+<button class="btn btn-gold" onclick="lock()">🔒 LOCK (1991)</button>
+</div>
+</div>
+
+<script>
+// YOUR PRIVATE PASSWORD - 1991
+const MY_PASSWORD="1991";
+let curVol='V100(1s)';
+function setVol(v,el){curVol=v;document.getElementById('currentVol').innerText=v;document.querySelectorAll('.vol').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
+function unlock(){
+let p=document.getElementById('passInput').value;
+if(p===MY_PASSWORD){document.getElementById('loginArea').style.display='none';document.getElementById('toolArea').style.display='block';}
+else{alert('❌ Wrong password! Your password is: 1991');}
+}
+function lock(){document.getElementById('toolArea').style.display='none';document.getElementById('loginArea').style.display='block';document.getElementById('passInput').value='';}
+async function autoPaste(){try{const t=await navigator.clipboard.readText();let c=t.replace(/[^0-9]/g,'').slice(-30);if(c.length>=2){document.getElementById('n').value=c;calc();}}catch(e){alert('Long press input -> Paste');}}
+function calc(){
+let v=document.getElementById('n').value.replace(/[^0-9]/g,'');if(v.length<2)return;
+let d=v.split('').map(x=>parseInt(x));let sum=d.reduce((a,b)=>a+b,0);
+let over=d.filter(x=>x>=5).length;let under=d.length-over;let last=d[d.length-1];
+let noMatch=0;for(let i=d.length-1;i>0;i--){if(d[i]!=d[i-1])noMatch++;else break;}
+document.getElementById('sum').innerText='Sum: '+sum+' ('+curVol+')';
+document.getElementById('over').innerText=over;document.getElementById('under').innerText=under;
+document.getElementById('last').innerText=last;document.getElementById('nomatch').innerText=noMatch;
+let freq=new Array(10).fill(0);d.forEach(n=>freq[n]++);let max=Math.max(...freq);
+let html='';for(let i=0;i<10;i++){html+=`<div class="f ${freq[i]==max&&max>0?'hot':''}">${i}<b>${freq[i]}</b></div>`;}
+document.getElementById('freqTable').innerHTML=html;
+let sorted=[];for(let i=0;i<10;i++){sorted.push({digit:i,count:freq[i],pct:(freq[i]/d.length*100).toFixed(0)});}
+sorted.sort((a,b)=>b.count-a.count);let top3=sorted.slice(0,3);
+document.getElementById('predictBox').innerHTML=`<div class="pred pred1">1st BEST<b>${top3[0].digit}</b><span>${top3[0].count}x (${top3[0].pct}%)</span></div><div class="pred pred2">2nd<b>${top3[1].digit}</b><span>${top3[1].count}x (${top3[1].pct}%)</span></div><div class="pred pred3">3rd<b>${top3[2].digit}</b><span>${top3[2].count}x (${top3[2].pct}%)</span></div>`;
+let alertBox=document.getElementById('soundAlert');let trade='';
+if(noMatch>=6){alertBox.style.display='block';alertBox.innerText='🔔 MATCH DUE! '+noMatch+'! TOP: '+top3.map(x=>x.digit).join(',');trade=`🚨 MATCH DUE! Trade 2 nums: ${top3[0].digit} & ${top3[1].digit} | Safe 3: +${top3[2].digit}`;}
+else if(noMatch>=4){alertBox.style.display='block';alertBox.style.background='orange';alertBox.innerText='⚠️ Coming! '+top3[0].digit+','+top3[1].digit;trade=`⚠️ PREPARE: Best ${top3[0].digit} | 2 nums: ${top3[0].digit},${top3[1].digit}`;}
+else{alertBox.style.display='none';trade=`HOT: ${top3[0].digit} (${top3[0].pct}%) | 2 NUMS: ${top3[0].digit},${top3[1].digit} | 3 NUMS: +${top3[2].digit}`;}
+document.getElementById('trade').innerHTML=trade;
+}
+</script>
+</body>
+</html>
