@@ -3,55 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KING PETER V9 FREQUENCY</title>
+<title>KING PETER V10 PREDICT</title>
 <style>
 body{font-family:Arial;background:#000;margin:0;padding:8px;color:white;text-align:center}
-.top{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;padding:12px;border-radius:12px;font-weight:900;font-size:14px}
-.card{background:white;color:black;border-radius:12px;padding:12px;margin-top:8px;border:3px solid #FFD700;text-align:left}
-.price-box{background:linear-gradient(90deg,#0a8a00,#00c700);color:white;padding:10px;border-radius:10px;text-align:center;font-weight:900;font-size:18px;margin:6px 0;border:2px solid gold}
-.price-box span{font-size:24px;color:#FFD700;display:block}
-.vol-bar{display:flex;gap:3px;flex-wrap:wrap;margin:8px 0}
-.vol{flex:1;min-width:52px;padding:7px 2px;border-radius:8px;font-weight:900;font-size:10px;text-align:center;cursor:pointer;border:2px solid #ccc;background:#eee;color:black}
+.top{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;padding:10px;border-radius:12px;font-weight:900;font-size:13px}
+.card{background:white;color:black;border-radius:12px;padding:10px;margin-top:8px;border:3px solid #FFD700;text-align:left}
+.price-box{background:linear-gradient(90deg,#0a8a00,#00c700);color:white;padding:8px;border-radius:10px;text-align:center;font-weight:900;font-size:16px;margin:5px 0;border:2px solid gold}
+.price-box span{font-size:22px;color:#FFD700;display:block}
+.vol-bar{display:flex;gap:3px;flex-wrap:wrap;margin:6px 0}
+.vol{flex:1;min-width:50px;padding:6px 2px;border-radius:7px;font-weight:900;font-size:10px;text-align:center;cursor:pointer;border:2px solid #ccc;background:#eee;color:black}
 .vol.active{background:gold;border-color:black;transform:scale(1.05)}
-.freq{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:8px 0}
-.f{padding:6px;border-radius:6px;text-align:center;font-weight:900;font-size:12px;border:2px solid #ddd;background:#f9f9f9;color:black}
-.f.hot{background:gold;border-color:black;transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,0.3)}
-.f b{display:block;font-size:16px;color:#0a8a00}
-input{width:94%;padding:11px;font-size:16px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:6px auto}
-.btn{width:95%;padding:11px;border:none;border-radius:10px;font-size:13px;font-weight:bold;margin-top:6px;display:block;margin:auto;cursor:pointer}
+.freq{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin:6px 0}
+.f{padding:5px;border-radius:6px;text-align:center;font-weight:900;font-size:11px;border:2px solid #ddd;background:#f9f9f9;color:black}
+.f.hot{background:gold;border-color:black;transform:scale(1.05)}
+.f b{display:block;font-size:14px;color:#0a8a00}
+.predict{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}
+.pred{border-radius:10px;padding:10px;text-align:center;font-weight:900;border:3px solid gold}
+.pred1{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;font-size:14px}
+.pred2{background:linear-gradient(90deg,#C0C0C0,#a8a8a8);color:black;font-size:13px}
+.pred3{background:linear-gradient(90deg,#CD7F32,#b56a2a);color:white;font-size:12px}
+.pred b{display:block;font-size:28px}
+input{width:94%;padding:10px;font-size:16px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:5px auto}
+.btn{width:95%;padding:10px;border:none;border-radius:10px;font-size:13px;font-weight:bold;margin-top:5px;display:block;margin:auto;cursor:pointer}
 .btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:black}
 .btn-green{background:#0a8a00;color:white}
 .btn-blue{background:#0066ff;color:white}
-.btn-whatsapp{background:#25D366;color:white;font-size:15px}
+.btn-whatsapp{background:#25D366;color:white;font-size:14px}
 #toolArea{display:none}
-.big{font-size:28px;font-weight:900;text-align:center;color:#0a8a00;margin:6px 0}
-.row{display:flex;gap:4px;margin-top:6px}
-.box{flex:1;background:#111;color:white;border-radius:8px;padding:5px;text-align:center;font-size:8px}
-.box b{color:#FFD700;display:block;font-size:13px}
-.hot{background:linear-gradient(90deg,#ff0000,#ff6600);color:white;padding:10px;border-radius:10px;text-align:center;margin-top:8px;font-weight:bold}
-.hot b{font-size:20px;display:block;color:yellow}
-.matchbox{background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:6px;margin-top:6px;font-size:11px;color:black}
-.alert{background:red;color:white;padding:8px;border-radius:10px;text-align:center;font-weight:900;margin-top:6px;display:none;font-size:11px}
-.small{font-size:9px;color:#666;text-align:center;margin-top:5px}
+.big{font-size:24px;font-weight:900;text-align:center;color:#0a8a00;margin:5px 0}
+.row{display:flex;gap:3px;margin-top:5px}
+.box{flex:1;background:#111;color:white;border-radius:7px;padding:4px;text-align:center;font-size:8px}
+.box b{color:#FFD700;display:block;font-size:12px}
+.hot{background:linear-gradient(90deg,#ff0000,#ff6600);color:white;padding:8px;border-radius:10px;text-align:center;margin-top:6px;font-weight:bold;font-size:12px}
+.hot b{font-size:18px;display:block;color:yellow}
+.matchbox{background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:6px;margin-top:5px;font-size:10px;color:black}
+.alert{background:red;color:white;padding:7px;border-radius:10px;text-align:center;font-weight:900;margin-top:5px;display:none;font-size:11px}
+.small{font-size:8px;color:#666;text-align:center;margin-top:4px}
 </style>
 </head>
 <body>
 
 <div id="loginArea">
-<div class="top">👑 KING PETER V9<br>FREQUENCY + ALL VOL + AUTO</div>
+<div class="top">👑 KING PETER V10<br>🔮 PREDICT 2-3 NUMBERS</div>
 <div class="card" style="text-align:center">
-<div class="price-box">💰 V9 PREMIUM<span>$70 USD</span>Frequency + All Features</div>
+<div class="price-box">💰 V10 PREDICT<span>$70 USD</span>Predict Top 3</div>
 <input id="passInput" type="password" placeholder="Enter Password">
-<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK V9</button>
-<a href="https://wa.me/254140702908?text=Hello%20King%20Peter%20I%20want%20V9%20FREQUENCY%20tool%20for%20$70" style="text-decoration:none">
+<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK V10</button>
+<a href="https://wa.me/254140702908?text=Hello%20King%20Peter%20I%20want%20V10%20PREDICT%20tool%20for%20$70" style="text-decoration:none">
 <button class="btn btn-whatsapp">💬 BUY $70 - 0140702908</button>
 </a>
-<p class="small">NEW: Frequency 0-9 counter + All Vol + Auto Paste<br>Analysis tool only</p>
+<p class="small">NEW: Predicts Top 3 hot numbers based on frequency<br>Analysis only - Not guaranteed - Trade responsibly</p>
 </div>
 </div>
 
 <div id="toolArea">
-<div class="top">👑 V9 FREQUENCY - <span id="currentVol">V100(1s)</span> ✅ $70</div>
+<div class="top">👑 V10 PREDICT - <span id="currentVol">V100(1s)</span> 🔮</div>
 <div id="soundAlert" class="alert"></div>
 <div class="card">
 <div class="vol-bar">
@@ -62,107 +68,4 @@ input{width:94%;padding:11px;font-size:16px;border:3px solid #FFD700;border-radi
 <div class="vol" onclick="setVol('V100',this)">V100</div>
 <div class="vol active" onclick="setVol('V100(1s)',this)">V100(1s)</div>
 </div>
-<input id="n" placeholder="Paste digits" type="text" inputmode="numeric">
-<div style="display:flex;gap:4px">
-<button class="btn btn-blue" style="flex:1" onclick="autoPaste()">📋 AUTO</button>
-<button class="btn btn-green" style="flex:1.5" onclick="calc()">🔥 ANALYZE</button>
-</div>
-
-<div class="big" id="sum">Sum: 0</div>
-
-<!-- FREQUENCY TABLE -->
-<div style="font-weight:900;font-size:12px;margin-top:6px;text-align:center">📊 FREQUENCY 0-9:</div>
-<div class="freq" id="freqTable">
-<div class="f">0<b>0</b></div><div class="f">1<b>0</b></div><div class="f">2<b>0</b></div><div class="f">3<b>0</b></div><div class="f">4<b>0</b></div>
-<div class="f">5<b>0</b></div><div class="f">6<b>0</b></div><div class="f">7<b>0</b></div><div class="f">8<b>0</b></div><div class="f">9<b>0</b></div>
-</div>
-
-<div class="row">
-<div class="box">OVER<b id="over">0</b></div>
-<div class="box">UNDER<b id="under">0</b></div>
-<div class="box">LAST<b id="last">-</b></div>
-<div class="box">NO-MATCH<b id="nomatch">0</b></div>
-</div>
-<div id="hotbox" class="hot" style="display:none">
-🔥 HOT <span id="hotVol">V100(1s)</span><b id="hotdigit">-</b><span id="hotreason"></span>
-</div>
-<div class="matchbox"><b>🎯 TRADE (<span class="tradeVol">V100(1s)</span>):</b><div id="trade">-</div></div>
-<button class="btn btn-gold" onclick="lock()">🔒 LOCK</button>
-</div>
-</div>
-
-<script>
-const MY_PASSWORD="1991";
-let curVol='V100(1s)';
-function setVol(v,el){
-curVol=v;
-document.getElementById('currentVol').innerText=v;
-document.getElementById('hotVol').innerText=v;
-document.querySelectorAll('.tradeVol').forEach(e=>e.innerText=v);
-document.querySelectorAll('.vol').forEach(e=>e.classList.remove('active'));
-el.classList.add('active');
-}
-function unlock(){
-let p=document.getElementById('passInput').value;
-if(p===MY_PASSWORD){
-document.getElementById('loginArea').style.display='none';
-document.getElementById('toolArea').style.display='block';
-}else{alert('❌ Wrong! WhatsApp 0140702908');}
-}
-function lock(){
-document.getElementById('toolArea').style.display='none';
-document.getElementById('loginArea').style.display='block';
-document.getElementById('passInput').value='';
-}
-async function autoPaste(){
-try{
-const text=await navigator.clipboard.readText();
-let cleaned=text.replace(/[^0-9]/g,'').slice(-25);
-if(cleaned.length>=2){document.getElementById('n').value=cleaned;calc();}
-else{alert('No digits in clipboard');}
-}catch(e){alert('Long press → Paste');}
-}
-let audioCtx;
-function playBeep(t=3){
-try{
-if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-for(let i=0;i<t;i++){
-let o=audioCtx.createOscillator();let g=audioCtx.createGain();
-o.connect(g);g.connect(audioCtx.destination);
-o.frequency.value=880+i*100;
-g.gain.setValueAtTime(0.3,audioCtx.currentTime+i*0.3);
-g.gain.exponentialRampToValueAtTime(0.01,audioCtx.currentTime+i*0.3+0.25);
-o.start(audioCtx.currentTime+i*0.3);o.stop(audioCtx.currentTime+i*0.3+0.25);
-}
-if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]);
-}catch(e){}
-}
-function calc(){
-let v=document.getElementById('n').value.replace(/[^0-9]/g,'');
-if(v.length<2){return;}
-let d=v.split('').map(x=>parseInt(x));
-let sum=d.reduce((a,b)=>a+b,0);
-let over=d.filter(x=>x>=5).length;
-let under=d.length-over;
-let last=d[d.length-1];
-let noMatch=0;
-for(let i=d.length-1;i>0;i--){if(d[i]!=d[i-1])noMatch++;else break;}
-document.getElementById('sum').innerText='Sum: '+sum+' ('+curVol+')';
-document.getElementById('over').innerText=over;
-document.getElementById('under').innerText=under;
-document.getElementById('last').innerText=last;
-document.getElementById('nomatch').innerText=noMatch;
-
-let freqArr=new Array(10).fill(0);
-d.forEach(num=>{freqArr[num]++;});
-let maxFreq=Math.max(...freqArr);
-let freqHtml='';
-for(let i=0;i<10;i++){
-let isHot=freqArr[i]===maxFreq && maxFreq>0;
-freqHtml+=`<div class="f ${isHot?'hot':''}">${i}<b>${freqArr[i]}</b></div>`;
-}
-document.getElementById('freqTable').innerHTML=freqHtml;
-
-let f={};d.forEach(k=>f[k]=(f[k]||0)+1);
-let sorted=Object.keys(f).map(k=>({digit:parseInt(k),count:f[k]})).sort((a,b)=>b.count-a.count);
-let
+<input id="n" placeholder="Paste digits e.g. 112233
