@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KING PETER V10s MATCH</title>
+<title>KING PETER V10s %</title>
 <style>
 body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0;text-align:center}
 .top{background:linear-gradient(90deg,#00ff88,#00cc66);color:#000;padding:12px;border-radius:12px;font-weight:900;border:2px solid gold}
@@ -12,25 +12,27 @@ body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0;text-alig
 .vol{flex:1;min-width:50px;padding:7px;border-radius:7px;font-weight:900;font-size:10px;text-align:center;cursor:pointer;border:2px solid #ccc;background:#eee}
 .vol.active{background:gold;border-color:#000;transform:scale(1.06)}
 .freq{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:8px 0}
-.f{padding:6px;border-radius:6px;text-align:center;font-weight:900;border:2px solid #ddd;background:#f9f9f9}
-.f.hot{background:gold;border-color:#000}
-.f b{display:block;font-size:16px}
+.f{padding:5px;border-radius:6px;text-align:center;font-weight:900;border:2px solid #ddd;background:#f9f9f9;font-size:11px}
+.f.hot{background:gold;border-color:#000;transform:scale(1.08)}
+.f b{display:block;font-size:15px;color:green}
+.f i{font-size:9px;color:#000;font-style:normal;display:block}
 .predict{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0}
-.pred{border-radius:10px;padding:10px;text-align:center;font-weight:900;border:3px solid gold}
+.pred{border-radius:10px;padding:8px;text-align:center;font-weight:900;border:3px solid gold}
 .pred1{background:gold;color:#000}
 .pred2{background:silver;color:#000}
 .pred3{background:#CD7F32;color:#fff}
 .pred b{display:block;font-size:28px}
+.pred span{font-size:10px}
 .match-box{background:linear-gradient(90deg,#00ff88,#00ff00);color:#000;border:3px solid gold;border-radius:12px;padding:10px;margin:8px 0;text-align:center;font-weight:900}
 .match-box.red{background:linear-gradient(90deg,#ff4444,#ff0000);color:#fff;animation:blink 0.6s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.6}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.7}}
 input{width:94%;padding:12px;border:3px solid gold;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:6px auto}
 .btn{width:95%;padding:11px;border:none;border-radius:10px;font-weight:bold;margin-top:6px;display:block;margin:auto;cursor:pointer}
 .btn-gold{background:gold;color:#000}
 .btn-green{background:#0a8a00;color:#fff}
 .btn-blue{background:#0066ff;color:#fff}
 #toolArea{display:none}
-.big{font-size:18px;font-weight:900;text-align:center;color:green;margin:6px 0}
+.big{font-size:16px;font-weight:900;text-align:center;color:green;margin:6px 0}
 .row{display:flex;gap:4px;margin-top:6px}
 .box{flex:1;background:#111;color:#fff;border-radius:8px;padding:6px;text-align:center;font-size:9px}
 .box b{color:gold;display:block;font-size:14px}
@@ -39,7 +41,7 @@ input{width:94%;padding:12px;border:3px solid gold;border-radius:10px;text-align
 <body>
 
 <div id="loginArea">
-<div class="top">👑 KING PETER V10s<br>NEXT MATCH PREDICTOR</div>
+<div class="top">👑 KING PETER V10s<br>WITH % PERCENTAGE</div>
 <div class="card" style="text-align:center">
 <h3>🔐 PRIVATE TOOL</h3>
 <input id="passInput" type="password" placeholder="Enter Password">
@@ -48,98 +50,4 @@ input{width:94%;padding:12px;border:3px solid gold;border-radius:10px;text-align
 </div>
 
 <div id="toolArea">
-<div class="top">⚡ V10s NEXT MATCH - <span id="cVol">V10(1s)</span></div>
-<div class="card">
-<div class="vol-bar">
-<div class="vol active" onclick="setVol('V10(1s)',this,15)">⚡V10(1s)</div>
-<div class="vol" onclick="setVol('V10',this,15)">V10</div>
-<div class="vol" onclick="setVol('V25',this,20)">V25</div>
-<div class="vol" onclick="setVol('V100',this,25)">V100</div>
-</div>
-
-<input id="n" placeholder="Paste digits" type="text">
-<div style="display:flex;gap:4px">
-<button class="btn btn-blue" style="flex:1" onclick="autoPaste()">📋 AUTO</button>
-<button class="btn btn-green" style="flex:1.5" onclick="calc()">🎯 PREDICT MATCH</button>
-</div>
-
-<div class="big" id="sum">-</div>
-
-<div class="match-box" id="nextMatchBox">
-🎯 NEXT MATCH PREDICTION<br>
-<span id="nextMatchText" style="font-size:14px">Paste digits to see</span>
-</div>
-
-<div style="font-weight:900;font-size:11px;text-align:center">📊 FREQUENCY 0-9:</div>
-<div class="freq" id="freqTable"></div>
-
-<div style="font-weight:900;font-size:11px;text-align:center;margin-top:6px">🔮 TOP 3 HOT:</div>
-<div class="predict" id="predictBox"></div>
-
-<div class="row">
-<div class="box">LAST<b id="last">-</b></div>
-<div class="box">NO-MATCH<b id="nomatch">0</b></div>
-<div class="box">OVER<b id="over">0</b></div>
-<div class="box">UNDER<b id="under">0</b></div>
-</div>
-
-<div style="background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:6px;margin-top:6px;font-size:11px;color:#000"><b>📚 MATCHES LOGIC:</b><div id="trade">-</div></div>
-
-<button class="btn btn-gold" onclick="lock()">🔒 LOCK</button>
-</div>
-</div>
-
-<script>
-const MY_PASSWORD="1991";
-let curVol='V10(1s)'; let curDigits=15;
-function setVol(v,el,d){curVol=v;curDigits=d;document.getElementById('cVol').innerText=v;document.querySelectorAll('.vol').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
-function unlock(){if(document.getElementById('passInput').value===MY_PASSWORD){loginArea.style.display='none';toolArea.style.display='block';}else alert('Wrong!');}
-function lock(){toolArea.style.display='none';loginArea.style.display='block';}
-async function autoPaste(){try{const t=await navigator.clipboard.readText();let c=t.replace(/[^0-9]/g,'').slice(-30);if(c.length>=2){document.getElementById('n').value=c;calc();}}catch(e){alert('Long press Paste');}}
-
-function calc(){
-let raw=document.getElementById('n').value.replace(/[^0-9]/g,'');if(raw.length<2)return;
-let v=raw.slice(-curDigits);let d=v.split('').map(x=>parseInt(x));
-let sum=d.reduce((a,b)=>a+b,0);let last=d[d.length-1];
-let over=d.filter(x=>x>=5).length;let under=d.length-over;
-let noMatch=0;for(let i=d.length-1;i>0;i--){if(d[i]!=d[i-1])noMatch++;else break;}
-
-document.getElementById('sum').innerText=`Sum ${sum} | ${d.length} digits | Last=${last} | NoMatch=${noMatch}`;
-document.getElementById('last').innerText=last;document.getElementById('nomatch').innerText=noMatch;
-document.getElementById('over').innerText=over;document.getElementById('under').innerText=under;
-
-let freq=new Array(10).fill(0);d.forEach(n=>freq[n]++);let max=Math.max(...freq);
-let html='';for(let i=0;i<10;i++){html+=`<div class="f ${freq[i]==max&&max>0?'hot':''}">${i}<b>${freq[i]}</b></div>`;}
-document.getElementById('freqTable').innerHTML=html;
-
-let sorted=[];for(let i=0;i<10;i++)sorted.push({digit:i,count:freq[i]});
-sorted.sort((a,b)=>b.count-a.count);let top3=sorted.slice(0,3);
-document.getElementById('predictBox').innerHTML=`<div class="pred pred1">1st<b>${top3[0].digit}</b>${top3[0].count}x</div><div class="pred pred2">2nd<b>${top3[1].digit}</b>${top3[1].count}x</div><div class="pred pred3">3rd<b>${top3[2].digit}</b>${top3[2].count}x</div>`;
-
-// NEXT MATCH PREDICTION LOGIC
-let box=document.getElementById('nextMatchBox');
-let txt=document.getElementById('nextMatchText');
-let trade=document.getElementById('trade');
-
-if(noMatch>=7){
-box.className='match-box red';
-txt.innerHTML=`🚨 MATCH DUE NOW!<br><span style="font-size:32px">${last}</span><br>Next will be ${last} (Last digit)<br>TRADE MATCHES on ${last}`;
-trade.innerHTML=`🎯 <b>NEXT MATCH = ${last}</b><br>Reason: No-Match ${noMatch} ticks overdue!<br>Matches Trade: Set Last=${last}<br>2 Numbers: Match ${last} + Hot ${top3[0].digit}<br>3 Numbers: Match ${last}, ${top3[0].digit}, ${top3[1].digit}<br>⚡ V10s Rule: Stake $0.35 Trade Now!`;
-try{let ctx=new (window.AudioContext||window.webkitAudioContext)();let o=ctx.createOscillator();o.frequency.value=1000;o.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.5);if(navigator.vibrate)navigator.vibrate([300,100,300]);}catch(e){}
-}
-else if(noMatch>=5){
-box.className='match-box';
-box.style.background='linear-gradient(90deg,#ffcc00,#ff9900)';
-txt.innerHTML=`⚠️ MATCH COMING SOON!<br><span style="font-size:28px">${last}</span><br>Probable Next Match = ${last}<br>Prepare Trade`;
-trade.innerHTML=`⚠️ Next Match Likely = <b>${last}</b><br>Why: No-Match ${noMatch} + Last digit ${last}<br>If Frequency Hot = ${top3[0].digit} also matches Last, DOUBLE CONFIRM!<br>Strategy: Prepare Match ${last}<br>2 Nums: ${last} & ${top3[0].digit}`;
-}
-else{
-box.className='match-box';
-box.style.background='linear-gradient(90deg,#00ff88,#00ff00)';
-txt.innerHTML=`📊 HOT DIGITS<br>Top: <span style="font-size:24px">${top3[0].digit}, ${top3[1].digit}, ${top3[2].digit}</span><br>Next Match when No-Match 6+ will be Last digit ${last}`;
-trade.innerHTML=`📊 Analysis: Last=${last}, No-Match=${noMatch} (Low)<br>Hot: ${top3[0].digit} (${top3[0].count}x), ${top3[1].digit}, ${top3[2].digit}<br>Matches: Wait for No-Match 6+ then Match will be ${last}<br>Current: Trade Over/Under or wait<br>2 Nums: ${top3[0].digit},${top3[1].digit} | 3 Nums: +${top3[2].digit}`;
-}
-}
-</script>
-</body>
-</html>
+<div class="top">⚡ V10s % - 
