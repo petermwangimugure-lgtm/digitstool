@@ -1,21 +1,107 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>King Peter Digit Tools</title></head>
-<body style="background:white;color:black;font-family:Arial;padding:20px;text-align:center">
-<h1 style="color:gold;background:black;padding:15px;border-radius:10px">KING PETER DIGIT TOOLS</h1>
-<h2>Digit Calculator Pro</h2>
-<input id="n" style="padding:15px;font-size:22px;width:90%;border:3px solid gold;text-align:center" placeholder="Enter Number 12345" oninput="calc()">
-<h1 id="sum" style="font-size:40px;margin-top:20px;color:green">Sum: 0</h1>
-<p id="more"></p>
-<button onclick="document.getElementById('n').value='';calc()" style="padding:12px 20px;background:black;color:gold;font-weight:bold">CLEAR</button>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KING PETER DIGIT TOOLS PRO</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;margin:0;padding:15px;text-align:center}
+.header{background:black;color:#FFD700;padding:18px;border-radius:14px;font-size:28px;font-weight:bold;line-height:1.2}
+.card{background:white;border-radius:14px;padding:18px;margin-top:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:2px solid #FFD700}
+input{width:95%;padding:16px;font-size:22px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold;outline:none}
+.big{font-size:42px;font-weight:900;color:#0a8a00;margin:12px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.box{background:#111;color:white;border-radius:10px;padding:12px;font-size:15px}
+.box b{color:#FFD700;display:block;font-size:20px}
+.box2{background:#fff8d0;border:2px dashed #c9a900;border-radius:10px;padding:10px;margin-top:10px;text-align:left}
+button{background:black;color:#FFD700;border:none;padding:12px 22px;border-radius:8px;font-weight:bold;font-size:16px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="header">KING PETER<br>DIGIT TOOLS PRO</div>
+<div class="card">
+<h3 style="margin:0 0 10px">Digit Calculator Pro</h3>
+<input id="n" placeholder="Enter Number e.g. 12345" oninput="calc()" inputmode="numeric">
+<div class="big" id="sum">Sum: 0</div>
+<div id="extra" style="font-size:16px"></div>
+
+<div class="grid">
+<div class="box">OVER (5-9)<b id="over">0</b></div>
+<div class="box">UNDER (0-4)<b id="under">0</b></div>
+<div class="box">EVEN DIGITS<b id="even">0</b></div>
+<div class="box">ODD DIGITS<b id="odd">0</b></div>
+</div>
+
+<div class="box2">
+<strong>🔁 DIGIT MATCHES / FREQUENCY:</strong>
+<div id="matches" style="margin-top:8px;font-size:16px;line-height:1.6">No matches yet</div>
+</div>
+
+<div class="box2">
+<strong>📊 FULL STATS:</strong>
+<div id="stats" style="margin-top:8px;font-size:15px"></div>
+</div>
+
+<button onclick="clearAll()">CLEAR</button>
+</div>
+
 <script>
 function calc(){
 let v=document.getElementById('n').value.replace(/[^0-9]/g,'');
-if(!v){document.getElementById('sum').innerText='Sum: 0';document.getElementById('more').innerText='';return}
+if(!v){reset();return}
 let d=v.split('').map(Number);
-let s=d.reduce((a,b)=>a+b,0);
+let sum=d.reduce((a,b)=>a+b,0);
 let rev=v.split('').reverse().join('');
-document.getElementById('sum').innerText='Sum: '+s;
-document.getElementById('more').innerText='Digits: '+d.length+' | Reverse: '+rev+' | Product: '+(v.includes('0')?0:d.reduce((a,b)=>a*b,1));
+let prod=v.includes('0')?0:d.reduce((a,b)=>a*b,1);
+
+let over=d.filter(x=>x>=5).length;
+let under=d.filter(x=>x<=4).length;
+let even=d.filter(x=>x%2==0).length;
+let odd=d.length-even;
+
+document.getElementById('sum').innerText='Sum: '+sum;
+document.getElementById('over').innerText=over;
+document.getElementById('under').innerText=under;
+document.getElementById('even').innerText=even;
+document.getElementById('odd').innerText=odd;
+
+document.getElementById('extra').innerHTML=`Digits: ${d.length} | Reverse: ${rev} | Product: ${prod}`;
+
+// MATCHES LOGIC
+let freq={};
+d.forEach(x=>freq[x]=(freq[x]||0)+1);
+let matchesHtml='';
+let hasMatch=false;
+for(let k=0;k<=9;k++){
+if(freq[k]){
+ let count=freq[k];
+ let label=count>1?`<b style="color:red">${k} x${count} MATCH!</b>`: `${k} x${count}`;
+ matchesHtml+=label+' &nbsp; ';
+ if(count>1) hasMatch=true;
 }
+}
+if(!hasMatch) matchesHtml+='<br><span style="color:green">All digits are unique - No duplicates</span>';
+else matchesHtml+='<br><span style="color:red;font-weight:bold">↑ Duplicate digits found!</span>';
+document.getElementById('matches').innerHTML=matchesHtml;
+
+document.getElementById('stats').innerHTML=`
+Sum Over/Under 20: <b>${sum>=20?'OVER 20':'UNDER 20'}</b><br>
+Average Digit: <b>${(sum/d.length).toFixed(2)}</b><br>
+Highest: <b>${Math.max(...d)}</b> | Lowest: <b>${Math.min(...d)}</b><br>
+Over/Under Balance: <b>${over>under?'MORE OVER':'MORE UNDER'}</b>
+`;
+}
+function reset(){
+document.getElementById('sum').innerText='Sum: 0';
+document.getElementById('over').innerText='0';
+document.getElementById('under').innerText='0';
+document.getElementById('even').innerText='0';
+document.getElementById('odd').innerText='0';
+document.getElementById('extra').innerText='';
+document.getElementById('matches').innerText='No matches yet';
+document.getElementById('stats').innerText='';
+}
+function clearAll(){document.getElementById('n').value='';reset();}
 </script>
-</body></html>
+</body>
+</html>
