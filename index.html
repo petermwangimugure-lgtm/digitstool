@@ -3,122 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KING PETER V4 - HOT DIGIT PREDICTOR</title>
+<title>KING PETER V6 - PRIVATE</title>
 <style>
-body{font-family:Arial;background:#0a0a0a;margin:0;padding:8px;color:white;text-align:center}
-.top{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;padding:12px;border-radius:12px;font-weight:900;font-size:16px}
-.card{background:white;color:black;border-radius:12px;padding:10px;margin-top:8px;border:3px solid #FFD700;text-align:left}
-input{width:94%;padding:12px;font-size:20px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:auto}
-.btn{width:95%;padding:11px;border:none;border-radius:8px;font-size:15px;font-weight:bold;margin-top:6px;display:block;margin-left:auto;margin-right:auto}
+body{font-family:Arial;background:#000;margin:0;padding:8px;color:white;text-align:center}
+.top{background:linear-gradient(90deg,#FFD700,#FFA500);color:black;padding:14px;border-radius:12px;font-weight:900;font-size:16px}
+.card{background:white;color:black;border-radius:12px;padding:12px;margin-top:8px;border:3px solid #FFD700;text-align:left}
+input{width:94%;padding:14px;font-size:20px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold;display:block;margin:8px auto}
+.btn{width:95%;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:bold;margin-top:8px;display:block;margin:auto;cursor:pointer}
+.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:black}
 .btn-green{background:#0a8a00;color:white}
-.btn-black{background:black;color:#FFD700}
-.big{font-size:32px;font-weight:900;text-align:center;color:#0a8a00;margin:6px 0}
-.row{display:flex;gap:5px;margin-top:5px}
-.box{flex:1;background:#111;color:white;border-radius:8px;padding:6px;text-align:center;font-size:10px}
-.box b{color:#FFD700;display:block;font-size:15px}
-.hot{background:linear-gradient(90deg,#ff0000,#ff6600);color:white;padding:10px;border-radius:10px;text-align:center;margin-top:8px;font-weight:bold;font-size:14px}
-.hot b{font-size:22px;display:block;color:yellow}
-.matchbox{background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:7px;margin-top:6px;font-size:12px;color:black}
+.btn-whatsapp{background:#25D366;color:white;font-size:18px}
+#toolArea{display:none}
+.big{font-size:36px;font-weight:900;text-align:center;color:#0a8a00;margin:8px 0}
+.row{display:flex;gap:5px;margin-top:6px}
+.box{flex:1;background:#111;color:white;border-radius:8px;padding:7px;text-align:center;font-size:10px}
+.box b{color:#FFD700;display:block;font-size:16px}
+.hot{background:linear-gradient(90deg,#ff0000,#ff6600);color:white;padding:12px;border-radius:10px;text-align:center;margin-top:8px;font-weight:bold}
+.hot b{font-size:26px;display:block;color:yellow}
+.matchbox{background:#fff8d0;border:2px dashed #c9a900;border-radius:8px;padding:8px;margin-top:7px;font-size:12px;color:black}
+.alert{background:red;color:white;padding:10px;border-radius:10px;text-align:center;font-weight:900;margin-top:8px;display:none}
 </style>
 </head>
 <body>
-<div class="top">👑 KING PETER V4<br>HOT DIGIT + MATCHES PREDICTOR</div>
 
+<div id="loginArea">
+<div class="top">👑 KING PETER PRIVATE TOOL<br>🔒 ENTER PASSWORD</div>
+<div class="card" style="text-align:center">
+<p style="font-weight:bold;font-size:16px">This tool is private for KING PETER clients only</p>
+<input id="passInput" type="password" placeholder="Enter Password: 1991">
+<button class="btn btn-gold" onclick="unlock()">🔓 UNLOCK TOOL</button>
+<p style="font-size:12px;color:gray;margin-top:10px">Don't have password? Contact owner:</p>
+<a href="https://wa.me/254140702908?text=Hello%20King%20Peter%20I%20need%20password%20for%20your%20digit%20tool%20V6" style="text-decoration:none">
+<button class="btn btn-whatsapp">💬 WHATSAPP: 0140702908</button>
+</a>
+</div>
+</div>
+
+<div id="toolArea">
+<div class="top">👑 KING PETER V6 - UNLOCKED ✅</div>
+<div id="soundAlert" class="alert"></div>
 <div class="card">
-<select id="vol" style="width:95%;padding:8px;border:2px solid gold;border-radius:8px;font-weight:bold;display:block;margin:0 auto 6px auto">
-<option>Volatility 10 Index</option>
-<option>Volatility 25 Index</option>
-<option selected>Volatility 100 (1s) - BEST FOR MATCHES</option>
-<option>Volatility 10 (1s)</option>
-<option>Volatility 50 (1s)</option>
-<option>Volatility 75 (1s)</option>
-</select>
-
-<input id="n" placeholder="Paste last 20 digits e.g. 1122334455" type="text" inputmode="numeric">
+<input id="n" placeholder="Paste digits e.g. 1122334455511" type="text" inputmode="numeric">
 <button class="btn btn-green" onclick="calc()">🔥 ANALYZE & PREDICT</button>
-<button class="btn btn-black" onclick="clearAll()">🗑️ CLEAR</button>
-
 <div class="big" id="sum">Sum: 0</div>
-
 <div class="row">
-<div class="box">OVER 5-9<b id="over">0</b></div>
-<div class="box">UNDER 0-4<b id="under">0</b></div>
+<div class="box">OVER<b id="over">0</b></div>
+<div class="box">UNDER<b id="under">0</b></div>
 <div class="box">LAST<b id="last">-</b></div>
-<div class="box">EVEN<b id="even">0</b></div>
+<div class="box">NO-MATCH<b id="nomatch">0</b></div>
 </div>
-
 <div id="hotbox" class="hot" style="display:none">
-<span id="hottext">HOT DIGIT</span>
-<b id="hotdigit">-</b>
-<span id="hotreason">-</span>
+🔥 HOT DIGIT<b id="hotdigit">-</b><span id="hotreason"></span>
 </div>
-
-<div class="matchbox"><b>🔁 ALL DIGIT COUNTS:</b><div id="matches">-</div></div>
-<div class="matchbox"><b>📊 STRATEGY FOR MATCHES:</b><div id="stats">-</div></div>
-<div class="matchbox"><b>🎯 WHAT TO TRADE NOW:</b><div id="trade">-</div></div>
+<div class="matchbox"><b>🔁 MATCHES:</b><div id="matches">-</div></div>
+<div class="matchbox"><b>🎯 TRADE NOW:</b><div id="trade">-</div></div>
+<button class="btn btn-gold" onclick="lock()">🔒 LOCK TOOL</button>
+</div>
 </div>
 
 <script>
+const MY_PASSWORD = "1991";
+function unlock(){
+let p=document.getElementById('passInput').value;
+if(p===MY_PASSWORD){
+document.getElementById('loginArea').style.display='none';
+document.getElementById('toolArea').style.display='block';
+}else{alert('❌ Wrong password! Correct is 1991');}
+}
+function lock(){
+document.getElementById('toolArea').style.display='none';
+document.getElementById('loginArea').style.display='block';
+document.getElementById('passInput').value='';
+}
+let audioCtx;
+function playBeep(t=3){
+try{
+if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+for(let i=0;i<t;i++){
+let o=audioCtx.createOscillator();let g=audioCtx.createGain();
+o.connect(g);g.connect(audioCtx.destination);
+o.frequency.value=880+i*100;
+g.gain.setValueAtTime(0.3,audioCtx.currentTime+i*0.3);
+g.gain.exponentialRampToValueAtTime(0.01,audioCtx.currentTime+i*0.3+0.25);
+o.start(audioCtx.currentTime+i*0.3);o.stop(audioCtx.currentTime+i*0.3+0.25);
+}
+if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]);
+}catch(e){}
+}
 function calc(){
 let v=document.getElementById('n').value.replace(/[^0-9]/g,'');
-if(v.length<3){alert('Enter at least 3 digits! Example: 11223');return;}
+if(v.length<2){alert('Enter digits');return;}
 let d=v.split('').map(x=>parseInt(x));
 let sum=d.reduce((a,b)=>a+b,0);
 let over=d.filter(x=>x>=5).length;
 let under=d.length-over;
-let even=d.filter(x=>x%2==0).length;
 let last=d[d.length-1];
-
+let noMatch=0;
+for(let i=d.length-1;i>0;i--){if(d[i]!=d[i-1])noMatch++;else break;}
 document.getElementById('sum').innerText='Sum: '+sum;
 document.getElementById('over').innerText=over;
 document.getElementById('under').innerText=under;
-document.getElementById('even').innerText=even;
 document.getElementById('last').innerText=last;
-
-// count
+document.getElementById('nomatch').innerText=noMatch;
 let f={};d.forEach(k=>f[k]=(f[k]||0)+1);
 let sorted=Object.keys(f).map(k=>({digit:parseInt(k),count:f[k]})).sort((a,b)=>b.count-a.count);
-
 let html='';
-sorted.forEach(o=>{html+=(o.count>1?'<span style="color:red;font-weight:900">'+o.digit+' x'+o.count+' MATCH! </span>':'<span>'+o.digit+' x'+o.count+' </span>');});
-for(let k=0;k<=9;k++){if(!f[k]){html+='<span style="color:gray">'+k+' x0 </span>';}}
+sorted.forEach(o=>{html+=(o.count>1?`<span style="color:red;font-weight:900">${o.digit} x${o.count} </span>`:`<span>${o.digit} x${o.count} </span>`);});
 document.getElementById('matches').innerHTML=html;
-
-// HOT DIGIT
 let hot=sorted[0];
-let cold=sorted[sorted.length-1];
 document.getElementById('hotbox').style.display='block';
 document.getElementById('hotdigit').innerText=hot.digit+' (x'+hot.count+')';
-document.getElementById('hottext').innerText='🔥 HOT DIGIT FOR MATCHES:';
-document.getElementById('hotreason').innerText=hot.digit+' appeared '+hot.count+' times in last '+d.length+' ticks!';
-
-// strategy
-let noMatchCount=0;
-for(let i=d.length-1;i>0;i--){if(d[i]!=d[i-1])noMatchCount++;else break;}
-
-let strat='No match for <b>'+noMatchCount+' ticks</b><br>';
-if(noMatchCount>=6){strat+='<span style="color:red">⚠️ MATCH is DUE! Trade MATCHES!</span><br>';}
-else if(noMatchCount<=1){strat+='<span style="color:orange">⚠️ Just had match, next is likely DIFFERS!</span><br>';}
-else{strat+='Waiting...<br>';}
-strat+='Most frequent: <b>'+hot.digit+'</b> | Least: <b>'+cold.digit+'</b>';
-document.getElementById('stats').innerHTML=strat;
-
-// what to trade
+document.getElementById('hotreason').innerText='Last='+last+' NoMatch='+noMatch+' ticks';
+let alertBox=document.getElementById('soundAlert');
 let trade='';
-if(noMatchCount>=5){trade='<b style="color:green">TRADE: MATCHES on '+hot.digit+' (Hot)</b><br>Reason: No match for '+noMatchCount+' ticks, match is due!';}
-else if(noMatchCount==0){trade='<b style="color:blue">TRADE: DIFFERS</b><br>Reason: Just had match ('+last+'), next often differs!';}
-else{trade='<b>TRADE: MATCHES on '+hot.digit+' or DIFFERS if you want safe</b><br>Last digit was '+last+'. If you think '+last+' will repeat, pick MATCHES on '+last+'.';}
-if(over>under+2)trade+='<br>Also: <b>UNDER is coming (OVER too many)</b>';
-if(under>over+2)trade+='<br>Also: <b>OVER is coming (UNDER too many)</b>';
+if(noMatch>=6){
+alertBox.style.display='block';alertBox.innerText='🔔 MATCH DUE! '+noMatch+' ticks! TRADE MATCHES ON '+hot.digit+' NOW!';trade=`🚨 TRADE MATCHES on ${hot.digit} NOW! MATCH OVERDUE!`;playBeep(4);
+}else if(noMatch>=4){
+alertBox.style.display='block';alertBox.style.background='orange';alertBox.innerText='⚠️ MATCH COMING SOON! '+noMatch+' ticks! Prepare '+hot.digit;trade=`⚠️ PREPARE MATCHES on ${hot.digit} - ${noMatch} ticks`;playBeep(2);
+}else if(noMatch==0){
+alertBox.style.display='none';trade=`🔵 TRADE DIFFERS - Just had MATCH (${last})`;
+}else{alertBox.style.display='none';trade=`TRADE MATCHES on ${hot.digit} (HOT) - NoMatch ${noMatch}`;}
 document.getElementById('trade').innerHTML=trade;
-}
-function clearAll(){
-document.getElementById('n').value='';
-document.getElementById('hotbox').style.display='none';
-document.getElementById('sum').innerText='Sum: 0';
-document.getElementById('over').innerText='0';document.getElementById('under').innerText='0';
-document.getElementById('even').innerText='0';document.getElementById('last').innerText='-';
-document.getElementById('matches').innerText='-';document.getElementById('stats').innerText='-';document.getElementById('trade').innerText='-';
 }
 </script>
 </body>
