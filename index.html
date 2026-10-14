@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KING PETER PRO - MATCHES OVER UNDER</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;margin:0;padding:15px;text-align:center}
+.top{background:black;color:#FFD700;padding:18px;border-radius:14px;font-size:24px;font-weight:bold}
+.card{background:white;border-radius:14px;padding:18px;margin-top:14px;border:3px solid #FFD700}
+input{width:92%;padding:16px;font-size:22px;border:3px solid #FFD700;border-radius:10px;text-align:center;font-weight:bold}
+.big{font-size:44px;font-weight:900;color:#0a8a00;margin:12px 0}
+.row{display:flex;gap:8px;margin-top:10px}
+.box{flex:1;background:#111;color:white;border-radius:10px;padding:12px}
+.box b{color:#FFD700;display:block;font-size:22px;margin-top:4px}
+.matchbox{background:#fff8d0;border:2px dashed #c9a900;border-radius:10px;padding:12px;margin-top:12px;text-align:left;font-size:15px}
+</style>
+</head>
+<body>
+<div class="top">KING PETER<br>DIGIT MATCHES + OVER/UNDER</div>
+<div class="card">
+<input id="n" placeholder="Enter Number e.g. 112233" oninput="calc()" inputmode="numeric">
+<div class="big" id="sum">Sum: 0</div>
+<div class="row">
+<div class="box">OVER (5-9)<b id="over">0</b></div>
+<div class="box">UNDER (0-4)<b id="under">0</b></div>
+</div>
+<div class="row">
+<div class="box">EVEN<b id="even">0</b></div>
+<div class="box">ODD<b id="odd">0</b></div>
+</div>
+<div class="matchbox">
+<b>🔁 DIGIT MATCHES:</b><br>
+<div id="matches" style="margin-top:6px">Type number to see matches</div>
+</div>
+<div class="matchbox">
+<b>📊 OVER/UNDER STATS:</b>
+<div id="stats" style="margin-top:6px">-</div>
+</div>
+</div>
+<script>
+function calc(){
+let v=document.getElementById('n').value.replace(/[^0-9]/g,'');
+if(!v){document.getElementById('sum').innerText='Sum: 0';document.getElementById('over').innerText='0';document.getElementById('under').innerText='0';document.getElementById('even').innerText='0';document.getElementById('odd').innerText='0';document.getElementById('matches').innerText='Type number';document.getElementById('stats').innerText='-';return}
+let d=v.split('').map(Number);
+let sum=d.reduce((a,b)=>a+b,0);
+let over=d.filter(x=>x>=5).length;
+let under=d.length-over;
+let even=d.filter(x=>x%2==0).length;
+let odd=d.length-even;
+document.getElementById('sum').innerText='Sum: '+sum;
+document.getElementById('over').innerText=over;
+document.getElementById('under').innerText=under;
+document.getElementById('even').innerText=even;
+document.getElementById('odd').innerText=odd;
+let f={};d.forEach(x=>f[x]=(f[x]||0)+1);
+let html='';
+for(let k=0;k<=9;k++){if(f[k]){html+= (
